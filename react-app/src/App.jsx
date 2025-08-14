@@ -11,6 +11,7 @@ import Card from 'react-bootstrap/Card';
 
 export default class App extends React.Component {
   async fetchConsumerKey() {
+    console.log('fetchConsumerKey');
     const response = await fetch('/api/get-sf-consumer-key');
     console.log(response);
     const data = await response?.json();
@@ -19,6 +20,7 @@ export default class App extends React.Component {
   }
 
   async componentDidMount() {
+    console.log('componentDidMount');
     this.setState({consumerKey: await this.fetchConsumerKey() ?? ''});
   }
 
