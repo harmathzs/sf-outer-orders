@@ -54,7 +54,6 @@ export default class QueryPage extends React.Component {
                     rows={6} 
                     onChange={e=>this.setState({query: e.target.value})} 
                     placeholder="SELECT Id, Name FROM Lead"
-                    value="SELECT Id, Name FROM Lead"
                 />
             </Form.Group>
             <Button onClick={this.handleRun}>Run</Button>
