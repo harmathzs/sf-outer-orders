@@ -12,6 +12,8 @@ import Navbar from 'react-bootstrap/Navbar';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 
+import Table from 'react-bootstrap/Table';
+
 export default class QueryPage extends React.Component {
     state = {
         query: 'SELECT Id, Name FROM Lead',
@@ -52,18 +54,51 @@ export default class QueryPage extends React.Component {
     }
 
     render() {
-        return <Form>
-            <Form.Group>
-                <Form.Label>SOQL Query: </Form.Label>
-                <Form.Control 
-                    as="textarea" 
-                    rows={6} 
-                    onChange={e=>this.setState({query: e.target.value})} 
-                    placeholder="SELECT Id, Name FROM Lead"
-                    value={this.state.query}
-                />
-            </Form.Group>
-            <Button onClick={this.handleRun}>Run</Button>
-        </Form>
+        return <Container>
+            <Row>
+                <Col>
+                    <Form>
+                        <Form.Group>
+                            <Form.Label>SOQL Query: </Form.Label>
+                            <Form.Control 
+                                as="textarea" 
+                                rows={6} 
+                                onChange={e=>this.setState({query: e.target.value})} 
+                                placeholder="SELECT Id, Name FROM Lead"
+                                value={this.state.query}
+                            />
+                        </Form.Group>
+                        <Button onClick={this.handleRun}>Run</Button>
+                    </Form>                
+                </Col>
+                <Col>
+                    {this.state.records && this.state.records.length>=1 && 
+                        <Table bordered={true} hover={true}>
+                            <thead>
+                                <tr>
+                                    {Object.keys(this.state.records[0])
+                                    .filter(key => key !== 'attributes')
+                                    .map(key => (
+                                        <th key={key}>{key}</th>
+                                    ))}
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {this.state.records.map((record, rowIndex) => (
+                                    <tr key={rowIndex}>
+                                        {Object.keys(record)
+                                            .filter(key => key !== 'attributes')
+                                            .map(key => (
+                                            <td key={key}>{record[key]}</td>
+                                            ))}
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </Table>
+                    }
+                </Col>                
+            </Row>
+
+        </Container>
     }
 }
