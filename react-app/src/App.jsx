@@ -14,6 +14,10 @@ export default class App extends React.Component {
     sfData: null,
   }
 
+  isLoggedIn() {
+    return this.state.sfData && this.state.sfData.access_token;
+  }
+
   async fetchConsumerKey() {
     console.log('fetchConsumerKey');
     const response = await fetch('/api/get-sf-consumer-key');
@@ -50,11 +54,19 @@ export default class App extends React.Component {
     const sfAuthUrl = `https://login.salesforce.com/services/oauth2/authorize?response_type=code&client_id=${this.state.consumerKey??''}&redirect_uri=${encodeURIComponent(callbackUrl)}&scope=refresh_token+api`;
 
     return <Container>
+      {this.isLoggedIn() && 
+        <Row>
+          <Col>
+            <p>menu</p>
+          </Col>
+        </Row>
+      }
+      
       <Row>
         <Col>
           <Card>
             <Card.Body>
-              {this.state.sfData?.access_token ? <>
+              {this.isLoggedIn() ? <>
                 <Card.Text>You are successfully logged in to Salesforce!</Card.Text>
                 <Card.Text>access_token: {this.state.sfData.access_token}</Card.Text>
                 <Card.Text>refresh_token: {this.state.sfData.refresh_token}</Card.Text>
