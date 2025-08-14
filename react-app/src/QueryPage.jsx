@@ -19,7 +19,8 @@ export default class QueryPage extends React.Component {
 
     handleRun = e => {
         e.preventDefault();
-        console.log('handleRun query', this.state.query);
+        const query = this.state.query;
+        console.log('handleRun query', query);
     }
 
     render() {
