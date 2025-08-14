@@ -14,7 +14,7 @@ import Form from 'react-bootstrap/Form';
 
 export default class QueryPage extends React.Component {
     state = {
-        query: '',
+        query: 'SELECT Id, Name FROM Lead',
         records: [],
     }
 
@@ -60,6 +60,7 @@ export default class QueryPage extends React.Component {
                     rows={6} 
                     onChange={e=>this.setState({query: e.target.value})} 
                     placeholder="SELECT Id, Name FROM Lead"
+                    value={this.state.query}
                 />
             </Form.Group>
             <Button onClick={this.handleRun}>Run</Button>

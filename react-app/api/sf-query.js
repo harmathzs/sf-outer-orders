@@ -9,6 +9,7 @@ export default async function handler(req, res) {
   console.log('req.body', req.body);
 
   const soql = req.body.query;
+  console.log('soql', soql);
   const url = req.body.url;
   console.log('url', url);
 
