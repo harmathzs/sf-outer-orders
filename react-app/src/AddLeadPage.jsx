@@ -26,7 +26,10 @@ export default class AddLeadPage extends React.Component {
         e.preventDefault();
 
         const { firstName, lastName, email, company } = this.state;
+        console.log('handleAddNewLead props', this.props);
         const { access_token, instance_url } = this.props.sfdata; // Pass these from parent after login
+        console.log('handleAddNewLead access_token', access_token);
+        console.log('handleAddNewLead instance_url', instance_url);
 
         try {
             const response = await fetch('/api/add-lead', {
