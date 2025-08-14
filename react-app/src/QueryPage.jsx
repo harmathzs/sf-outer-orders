@@ -39,11 +39,11 @@ export default class QueryPage extends React.Component {
                 Authorization: `Bearer ${accessToken}`,
                 'Content-Type': 'application/json',
             },
-            body: {
+            body: JSON.stringify({
                 query: query,
                 url: url,
                 sfdata: this.props.sfdata,
-            }
+            })
         });
         console.log('response', response);
         const data = await response.json();
