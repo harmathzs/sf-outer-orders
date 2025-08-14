@@ -35,7 +35,11 @@ export default class App extends React.Component {
 
         fetch(`/api/sf-token-exchange?code=${code}`)
         .then(res => res.json())
-        .then(data => this.setState({sfData: data}))
+        .then(data => {
+          this.setState({sfData: data});
+          console.log('data', data);
+          
+        })
         .catch(console.warn);
       }
     }
