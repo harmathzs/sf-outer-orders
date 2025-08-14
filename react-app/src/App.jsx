@@ -6,6 +6,8 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Card from 'react-bootstrap/Card';
+import Nav from 'react-bootstrap/Nav';
+import Navbar from 'react-bootstrap/Navbar';
 
 export default class App extends React.Component {
   state = {
@@ -53,30 +55,36 @@ export default class App extends React.Component {
     const callbackUrl = 'https://sf-outer-orders.vercel.app/oauth/callback';
     const sfAuthUrl = `https://login.salesforce.com/services/oauth2/authorize?response_type=code&client_id=${this.state.consumerKey??''}&redirect_uri=${encodeURIComponent(callbackUrl)}&scope=refresh_token+api`;
 
-    return <Container>
-      {this.isLoggedIn() && 
+    return <>
+      {this.isLoggedIn() && <Navbar fixed="top">
+                <Container>
+                  <Navbar.Brand href="#home">React-Salesforce</Navbar.Brand>
+                  <Navbar.Collapse>
+                    <Nav>
+                      <Nav.Link href="#home">Login</Nav.Link>
+                      <Nav.Link href="#query">Query</Nav.Link>
+                    </Nav>
+                  </Navbar.Collapse>
+                </Container>
+              </Navbar>
+        }
+      <Container>
         <Row>
           <Col>
-            <p>menu</p>
+            <Card>
+              <Card.Body>
+                {this.isLoggedIn() ? <>
+                  <Card.Text>You are successfully logged in to Salesforce!</Card.Text>
+                  <Card.Text>access_token: {this.state.sfData.access_token}</Card.Text>
+                  <Card.Text>refresh_token: {this.state.sfData.refresh_token}</Card.Text>
+                  <Card.Text>instance_url: {this.state.sfData.instance_url}</Card.Text>
+                </> : <a href={sfAuthUrl}>Log in to Salesforce</a> }
+              </Card.Body>
+            </Card>
           </Col>
         </Row>
-      }
-      
-      <Row>
-        <Col>
-          <Card>
-            <Card.Body>
-              {this.isLoggedIn() ? <>
-                <Card.Text>You are successfully logged in to Salesforce!</Card.Text>
-                <Card.Text>access_token: {this.state.sfData.access_token}</Card.Text>
-                <Card.Text>refresh_token: {this.state.sfData.refresh_token}</Card.Text>
-                <Card.Text>instance_url: {this.state.sfData.instance_url}</Card.Text>
-              </> : <a href={sfAuthUrl}>Log in to Salesforce</a> }
-            </Card.Body>
-          </Card>
-        </Col>
-      </Row>
-    </Container>
+      </Container>
+    </>
   } 
 }
 
