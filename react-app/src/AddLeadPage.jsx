@@ -9,6 +9,8 @@ import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 
+import Toast from 'react-bootstrap/Toast';
+
 export default class AddLeadPage extends React.Component {
     state={
         firstName: 'Jane',
@@ -16,6 +18,7 @@ export default class AddLeadPage extends React.Component {
         email: 'jane@doe.com',
         company: 'Encom Corp',
         //sfdata: {},
+        createdLead: {},
     }
 
     componentDidMount() {
@@ -53,7 +56,8 @@ export default class AddLeadPage extends React.Component {
             console.log('Salesforce response', data);
 
             if (response.ok) {
-                alert(`Lead created! Id: ${data.id}`);
+                //alert(`Lead created! Id: ${data.id}`);
+                this.setState({createdLead: data});
             } else {
                 alert(`Error creating lead: ${JSON.stringify(data)}`);
             }
@@ -67,6 +71,19 @@ export default class AddLeadPage extends React.Component {
     render() {
         return <Container style={{top: '112px', marginTop: '56px'}}>
             <Row>
+                {this.state.createdLead && this.state.createdLead.id && 
+                <Col>
+                    <Toast bg="success">
+                        <Toast.Header>
+                            <strong>Lead</strong>
+                            <small>success</small>
+                        </Toast.Header>
+                        <Toast.Body>
+                            Lead created! Id: {this.state.createdLead.id}
+                        </Toast.Body>
+                    </Toast>
+                </Col>}
+
                 <Col>
                     <Form>
                         <Form.Group>
