@@ -7,9 +7,11 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Card from 'react-bootstrap/Card';
 
-//import sfCredentials from './credentials.js';
-
 export default class App extends React.Component {
+  state = {
+    consumerKey: null,
+  }
+
   async fetchConsumerKey() {
     console.log('fetchConsumerKey');
     const response = await fetch('/api/get-sf-consumer-key');
