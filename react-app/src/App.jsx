@@ -15,7 +15,7 @@ export default class App extends React.Component {
     console.log(response);
     const data = await response?.json();
     console.log(data ?? 'no data');
-    return data?.consumerKey;
+    return data?.sfConsumerKey;
   }
 
   async componentDidMount() {
