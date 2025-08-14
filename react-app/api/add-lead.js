@@ -7,6 +7,11 @@ export default async function handler(req, res) {
   const accessToken = req.headers.authorization?.split(' ')[1];
   const { instanceUrl, lead } = req.body;
 
+  console.log('req.body', req.body);
+  console.log('accessToken', accessToken);
+  console.log('instanceUrl', instanceUrl);
+  console.log('lead', lead);
+
   if (!accessToken || !instanceUrl) {
     return res.status(400).json({ error: 'Missing access token or instance URL' });
   }
