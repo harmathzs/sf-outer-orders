@@ -1,4 +1,7 @@
 export default function handler(req, res) {
+    console.log(process);
+    console.log(process?.env);
+
     // Read environment variable on the server
     const consumerKey = process?.env?.REACT_APP_EXTERNAL_CLIENT_APP_CONSUMER_KEY;
     console.log('consumerKey length', consumerKey?.length);
