@@ -15,16 +15,16 @@ export default class App extends React.Component {
     console.log(response);
     const data = await response?.json();
     console.log(data ?? 'no data');
-    return data?.sfConsumerKey;
+    return data?.sfConsumerKey ?? '';
   }
 
   async componentDidMount() {
-    this.setState({consumerKey: await this.fetchConsumerKey()});
+    this.setState({consumerKey: await this.fetchConsumerKey() ?? ''});
   }
 
   render() {
     const callbackUrl = 'https://sf-outer-orders.vercel.app/oauth/callback';
-    const sfAuthUrl = `https://login.salesforce.com/services/oauth2/authorize?response_type=code&client_id=${this.state.consumerKey}&redirect_uri=${encodeURIComponent(callbackUrl)}&scope=refresh_token+api`;
+    const sfAuthUrl = `https://login.salesforce.com/services/oauth2/authorize?response_type=code&client_id=${this.state.consumerKey??''}&redirect_uri=${encodeURIComponent(callbackUrl)}&scope=refresh_token+api`;
 
     return <Container>
       <Row>
