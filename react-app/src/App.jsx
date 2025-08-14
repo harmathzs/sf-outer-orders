@@ -11,6 +11,7 @@ export default class App extends React.Component {
   state = {
     consumerKey: null,
     code: null,
+    sfData: null,
   }
 
   async fetchConsumerKey() {
@@ -29,7 +30,13 @@ export default class App extends React.Component {
 
       const urlParams = new URLSearchParams(window.location.search);
       if (urlParams.has('code')) {
-        this.setState({ code: urlParams.get('code')});
+        const code = urlParams.get('code');
+        this.setState({ code: code });
+
+        fetch(`/api/sf-token-exchange?code=${code}`)
+        .then(res => res.json())
+        .then(data => this.setState({sfData: data}))
+        .catch(console.warn);
       }
     }
   }
