@@ -13,15 +13,20 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 
 export default class QueryPage extends React.Component {
+    state = {
+        query: '',
+    }
+
     handleRun = e => {
         e.preventDefault();
+        console.log('handleRun query', this.state.query);
     }
 
     render() {
         return <Form>
             <Form.Group>
                 <Form.Label>SOQL Query: </Form.Label>
-                <Form.Control as="textarea" rows={6} />
+                <Form.Control as="textarea" rows={6} onChange={value=>this.setState({query: value})} />
             </Form.Group>
             <Button onClick={this.handleRun}>Run</Button>
         </Form>
