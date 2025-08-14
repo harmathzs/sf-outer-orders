@@ -54,7 +54,7 @@ export default class App extends React.Component {
         <Col>
           <Card>
             <Card.Body>
-              {this.state.sfData.access_token ? <>
+              {this.state.sfData?.access_token ? <>
                 <Card.Text>You are successfully logged in to Salesforce!</Card.Text>
                 <Card.Text>access_token: {this.state.sfData.access_token}</Card.Text>
                 <Card.Text>refresh_token: {this.state.sfData.refresh_token}</Card.Text>
