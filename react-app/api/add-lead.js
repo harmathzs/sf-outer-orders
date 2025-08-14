@@ -5,19 +5,19 @@ export default async function handler(req, res) {
   }
 
   const accessToken = req.headers.authorization?.split(' ')[1];
-  const { instanceUrl, lead } = req.body;
+  const { instance_url, lead } = req.body;
 
   console.log('req.body', req.body);
   console.log('accessToken', accessToken);
-  console.log('instanceUrl', instanceUrl);
+  console.log('instance_url', instance_url);
   console.log('lead', lead);
 
-  if (!accessToken || !instanceUrl) {
+  if (!accessToken || !instance_url) {
     return res.status(400).json({ error: 'Missing access token or instance URL' });
   }
 
   try {
-    const sfResponse = await fetch(`${instanceUrl}/services/data/v57.0/sobjects/Lead/`, {
+    const sfResponse = await fetch(`${instance_url}/services/data/v57.0/sobjects/Lead/`, {
       method: 'POST',
       headers: {
         Authorization: `Bearer ${accessToken}`,
