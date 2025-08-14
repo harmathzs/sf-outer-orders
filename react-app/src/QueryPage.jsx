@@ -24,16 +24,22 @@ export default class QueryPage extends React.Component {
         console.log('handleRun query', query);
 
         const soqlEncoded = encodeURIComponent(query);
+        console.log('soqlEncoded', soqlEncoded);
         const instanceUrl = this.props.instance_url;
+        console.log('instanceUrl', instanceUrl);
         const url = `${instanceUrl}/services/data/v57.0/query?q=${soqlEncoded}`;
+        console.log('url', url);
         const accessToken = this.props.access_token;
+        console.log('accessToken length', accessToken.length);
         const response = await fetch(url, {
             headers: {
                 Authorization: `Bearer ${accessToken}`,
                 'Content-Type': 'application/json',
             },
         });
+        console.log('response', response);
         const data = await response.json();
+        console.log('data', data);
         this.setState({records: data.records});
     }
 
