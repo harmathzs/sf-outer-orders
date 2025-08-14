@@ -1,3 +1,6 @@
+# Exclude sensitive credentials
+credentials.js
+
 # Logs
 logs
 *.log
