@@ -54,7 +54,7 @@ export default class QueryPage extends React.Component {
     }
 
     render() {
-        return <Container style={{marginTop: '56px'}}>
+        return <Container style={{top: '112px', marginTop: '56px'}}>
             <Row>
                 <Col>
                     <Form>
