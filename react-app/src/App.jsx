@@ -16,7 +16,7 @@ export default class App extends React.Component {
   }
 
   render() {
-    const sfAuthUrl = `https://login.salesforce.com/services/oauth2/authorize?response_type=code&client_id=${this.state.externalClientAppConsumerKey}&redirect_uri=https%3A%2F%2Fxxx.vercel.com%2Foauth%2Fcallback&scope=refresh_token+api`;
+    const sfAuthUrl = `https://login.salesforce.com/services/oauth2/authorize?response_type=code&client_id=${this.state.externalClientAppConsumerKey}&redirect_uri=https%3A%2F%2Fsf-outer-orders-git-dev-zsolt-harmaths-projects.vercel.app%2Foauth%2Fcallback&scope=refresh_token+api`;
 
     return <Container>
       <Row>
