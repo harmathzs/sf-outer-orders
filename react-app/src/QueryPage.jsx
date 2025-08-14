@@ -15,19 +15,38 @@ import Form from 'react-bootstrap/Form';
 export default class QueryPage extends React.Component {
     state = {
         query: '',
+        records: [],
     }
 
-    handleRun = e => {
+    handleRun = async e => {
         e.preventDefault();
         const query = this.state.query;
         console.log('handleRun query', query);
+
+        const soqlEncoded = encodeURIComponent(query);
+        const instanceUrl = this.props.instance_url;
+        const url = `${instanceUrl}/services/data/v57.0/query?q=${soqlEncoded}`;
+        const accessToken = this.props.access_token;
+        const response = await fetch(url, {
+            headers: {
+                Authorization: `Bearer ${accessToken}`,
+                'Content-Type': 'application/json',
+            },
+        });
+        const data = await response.json();
+        this.setState({records: data.records});
     }
 
     render() {
         return <Form>
             <Form.Group>
                 <Form.Label>SOQL Query: </Form.Label>
-                <Form.Control as="textarea" rows={6} onChange={e=>this.setState({query: e.target.value})} />
+                <Form.Control 
+                    as="textarea" 
+                    rows={6} 
+                    onChange={e=>this.setState({query: e.target.value})} 
+                    placeholder="SELECT Id, Name FROM Lead"
+                />
             </Form.Group>
             <Button onClick={this.handleRun}>Run</Button>
         </Form>

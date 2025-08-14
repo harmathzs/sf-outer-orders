@@ -91,7 +91,7 @@ export default class App extends React.Component {
           }
           { this.state.page=='query' &&
             <Col>
-              <QueryPage />
+              <QueryPage sfdata={this.state.sfData} />
             </Col>
           }
           { this.state.page=='addlead' &&
