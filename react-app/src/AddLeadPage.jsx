@@ -30,7 +30,7 @@ export default class AddLeadPage extends React.Component {
                         <Form.Group>
                             <Form.Label>First Name: </Form.Label>
                             <Form.Control 
-                                as="text" 
+                                type="text" 
                                 onChange={e=>this.setState({firstName: e.target.value})} 
                                 placeholder="Jane"
                                 value={this.state.firstName}
@@ -39,7 +39,7 @@ export default class AddLeadPage extends React.Component {
                         <Form.Group>
                             <Form.Label>Last Name: </Form.Label>
                             <Form.Control 
-                                as="text" 
+                                type="text" 
                                 onChange={e=>this.setState({lastName: e.target.value})} 
                                 placeholder="Doe"
                                 value={this.state.lastName}
@@ -48,7 +48,7 @@ export default class AddLeadPage extends React.Component {
                         <Form.Group>
                             <Form.Label>Email: </Form.Label>
                             <Form.Control 
-                                as="text" 
+                                type="email" 
                                 onChange={e=>this.setState({email: e.target.value})} 
                                 placeholder="jane@doe.com"
                                 value={this.state.email}
@@ -57,7 +57,7 @@ export default class AddLeadPage extends React.Component {
                         <Form.Group>
                             <Form.Label>Company: </Form.Label>
                             <Form.Control 
-                                as="text" 
+                                type="text" 
                                 onChange={e=>this.setState({company: e.target.value})} 
                                 placeholder="Encom Corp"
                                 value={this.state.company}
