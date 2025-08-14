@@ -9,6 +9,9 @@ import Card from 'react-bootstrap/Card';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 
+import QueryPage from "./QueryPage";
+import AddLeadPage from "./AddLeadPage";
+
 export default class App extends React.Component {
   state = {
     consumerKey: null,
@@ -88,20 +91,12 @@ export default class App extends React.Component {
           }
           { this.state.page=='query' &&
             <Col>
-              <Card>
-                <Card.Body>
-                  <p>Query</p>
-                </Card.Body>
-              </Card>
+              <QueryPage />
             </Col>
           }
           { this.state.page=='addlead' &&
             <Col>
-              <Card>
-                <Card.Body>
-                  <p>Add Lead</p>
-                </Card.Body>
-              </Card>
+              <AddLeadPage />
             </Col>
           }                    
         </Row>
