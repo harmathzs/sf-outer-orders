@@ -14,6 +14,7 @@ export default class App extends React.Component {
     consumerKey: null,
     code: null,
     sfData: null,
+    page: 'home'
   }
 
   isLoggedIn() {
@@ -58,30 +59,51 @@ export default class App extends React.Component {
     return <>
       {this.isLoggedIn() && <Navbar fixed="top">
                 <Container>
-                  <Navbar.Brand href="#home">React-Salesforce</Navbar.Brand>
+                  <Navbar.Brand href="#home" onClick={()=>this.setState({page: 'home'})}>React-Salesforce</Navbar.Brand>
                   <Navbar.Collapse>
                     <Nav>
-                      <Nav.Link href="#home">Login</Nav.Link>
-                      <Nav.Link href="#query">Query</Nav.Link>
+                      <Nav.Link href="#home" onClick={()=>this.setState({page: 'home'})}>Login</Nav.Link>
+                      <Nav.Link href="#query" onClick={()=>this.setState({page: 'query'})}>Query</Nav.Link>
+                      <Nav.Link href="#addlead" onClick={()=>this.setState({page: 'addlead'})}>Add Lead</Nav.Link>
                     </Nav>
                   </Navbar.Collapse>
                 </Container>
               </Navbar>
         }
-      <Container>
+      <Container style={{marginTop: '56px'}}>
         <Row>
-          <Col>
-            <Card>
-              <Card.Body>
-                {this.isLoggedIn() ? <>
-                  <Card.Text>You are successfully logged in to Salesforce!</Card.Text>
-                  <Card.Text>access_token: {this.state.sfData.access_token}</Card.Text>
-                  <Card.Text>refresh_token: {this.state.sfData.refresh_token}</Card.Text>
-                  <Card.Text>instance_url: {this.state.sfData.instance_url}</Card.Text>
-                </> : <a href={sfAuthUrl}>Log in to Salesforce</a> }
-              </Card.Body>
-            </Card>
-          </Col>
+          { this.state.page=='home' &&
+            <Col>
+              <Card>
+                <Card.Body>
+                  {this.isLoggedIn() ? <>
+                    <Card.Text>You are successfully logged in to Salesforce!</Card.Text>
+                    <Card.Text>access_token: {this.state.sfData.access_token}</Card.Text>
+                    <Card.Text>refresh_token: {this.state.sfData.refresh_token}</Card.Text>
+                    <Card.Text>instance_url: {this.state.sfData.instance_url}</Card.Text>
+                  </> : <a href={sfAuthUrl}>Log in to Salesforce</a> }
+                </Card.Body>
+              </Card>
+            </Col>
+          }
+          { this.state.page=='query' &&
+            <Col>
+              <Card>
+                <Card.Body>
+                  <p>Query</p>
+                </Card.Body>
+              </Card>
+            </Col>
+          }
+          { this.state.page=='addlead' &&
+            <Col>
+              <Card>
+                <Card.Body>
+                  <p>Add Lead</p>
+                </Card.Body>
+              </Card>
+            </Col>
+          }                    
         </Row>
       </Container>
     </>
