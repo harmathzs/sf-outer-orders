@@ -27,11 +27,11 @@ export default class QueryPage extends React.Component {
 
         const soqlEncoded = encodeURIComponent(query);
         console.log('soqlEncoded', soqlEncoded);
-        const instanceUrl = this.props.instance_url;
+        const instanceUrl = this.props.sfdata.instance_url;
         console.log('instanceUrl', instanceUrl);
         const url = `${instanceUrl}/services/data/v57.0/query?q=${soqlEncoded}`;
         console.log('url', url);
-        const accessToken = this.props.access_token;
+        const accessToken = this.props.sfdata.access_token;
         console.log('accessToken length', accessToken.length);
         const response = await fetch(url, {
             headers: {
@@ -54,6 +54,7 @@ export default class QueryPage extends React.Component {
                     rows={6} 
                     onChange={e=>this.setState({query: e.target.value})} 
                     placeholder="SELECT Id, Name FROM Lead"
+                    value="SELECT Id, Name FROM Lead"
                 />
             </Form.Group>
             <Button onClick={this.handleRun}>Run</Button>
