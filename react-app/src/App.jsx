@@ -17,6 +17,7 @@ export default class App extends React.Component {
   }
 
   async componentDidMount() {
+    debugger;
     this.setState({consumerKey: await this.fetchConsumerKey()});
   }
 
