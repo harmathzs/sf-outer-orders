@@ -34,6 +34,7 @@ export default class QueryPage extends React.Component {
         const accessToken = this.props.sfdata.access_token;
         console.log('accessToken length', accessToken.length);
         const response = await fetch('/api/sf-query', {
+            method: 'POST',
             headers: {
                 Authorization: `Bearer ${accessToken}`,
                 'Content-Type': 'application/json',
