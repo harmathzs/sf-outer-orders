@@ -96,7 +96,7 @@ export default class App extends React.Component {
           }
           { this.state.page=='addlead' &&
             <Col>
-              <AddLeadPage />
+              <AddLeadPage sfdata={this.state.sfData} />
             </Col>
           }                    
         </Row>

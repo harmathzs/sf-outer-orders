@@ -15,12 +15,51 @@ export default class AddLeadPage extends React.Component {
         lastName: 'Doe',
         email: 'jane@doe.com',
         company: 'Encom Corp',
+        //sfdata: {},
     }
 
-    handleAddNewLead = e => {
-        e.preventDefault();
-        console.log('handleAddNewLead state', this.state);
+    componentDidMount() {
+        //this.setState({sfdata: this.props.sfdata});
     }
+
+    handleAddNewLead = async (e) => {
+        e.preventDefault();
+
+        const { firstName, lastName, email, company } = this.state;
+        const { access_token, instance_url } = this.props.sfdata; // Pass these from parent after login
+
+        try {
+            const response = await fetch('/api/add-lead', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    Authorization: `Bearer ${access_token}`,
+                },
+                body: JSON.stringify({
+                    instance_url,
+                    lead: {
+                        FirstName: firstName,
+                        LastName: lastName,
+                        Email: email,
+                        Company: company,
+                    },
+                }),
+            });
+
+            const data = await response.json();
+            console.log('Salesforce response', data);
+
+            if (response.ok) {
+                alert(`Lead created! Id: ${data.id}`);
+            } else {
+                alert(`Error creating lead: ${JSON.stringify(data)}`);
+            }
+        } catch (err) {
+            console.error(err);
+            alert(`Request failed: ${err.message}`);
+        }
+    };
+
 
     render() {
         return <Container style={{top: '112px', marginTop: '56px'}}>
