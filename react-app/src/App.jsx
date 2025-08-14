@@ -11,12 +11,12 @@ import Card from 'react-bootstrap/Card';
 
 export default class App extends React.Component {
   state = {
-    externalClientAppConsumerKey: process.env.REACT_APP_externalClientAppConsumerKey,
-    externalClientAppConsumerSecret: process.env.REACT_APP_externalClientAppConsumerSecret,
+    externalClientAppConsumerKey: process.env.REACT_APP_EXTERNAL_CLIENT_APP_CONSUMER_KEY,
+    externalClientAppConsumerSecret: process.env.REACT_APP_EXTERNAL_CLIENT_APP_CONSUMER_SECRET,
   }
 
   render() {
-    const sfAuthUrl = `https://login.salesforce.com/services/oauth2/authorize?response_type=code&client_id=${this.state.externalClientAppConsumerKey}&redirect_uri=https%3A%2F%2Fsf-outer-orders-git-dev-zsolt-harmaths-projects.vercel.app%2Foauth%2Fcallback&scope=refresh_token+api`;
+    const sfAuthUrl = `https://login.salesforce.com/services/oauth2/authorize?response_type=code&client_id=${this.state.externalClientAppConsumerKey}&redirect_uri=${encodeURIComponent('https://sf-outer-orders-git-dev-zsolt-harmaths-projects.vercel.app/oauth/callback')}&scope=refresh_token+api`;
 
     return <Container>
       <Row>
