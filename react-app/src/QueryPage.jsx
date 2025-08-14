@@ -23,6 +23,8 @@ export default class QueryPage extends React.Component {
         const query = this.state.query;
         console.log('handleRun query', query);
 
+        console.log('props', this.props);
+
         const soqlEncoded = encodeURIComponent(query);
         console.log('soqlEncoded', soqlEncoded);
         const instanceUrl = this.props.instance_url;
