@@ -16,6 +16,11 @@ export default class App extends React.Component {
   }
 
   render() {
+    console.log('process', process);
+    console.log('env', process.env);
+    console.log('keylen', process.env.REACT_APP_EXTERNAL_CLIENT_APP_CONSUMER_KEY?.length);
+    console.log('seclen', process.env.REACT_APP_EXTERNAL_CLIENT_APP_CONSUMER_SECRET?.length);
+
     const callbackUrl = 'https://sf-outer-orders.vercel.app/oauth/callback';
     const sfAuthUrl = `https://login.salesforce.com/services/oauth2/authorize?response_type=code&client_id=${this.state.externalClientAppConsumerKey}&redirect_uri=${encodeURIComponent(callbackUrl)}&scope=refresh_token+api`;
 
