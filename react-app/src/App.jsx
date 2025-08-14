@@ -10,6 +10,7 @@ import Card from 'react-bootstrap/Card';
 export default class App extends React.Component {
   state = {
     consumerKey: null,
+    code: null,
   }
 
   async fetchConsumerKey() {
@@ -23,7 +24,14 @@ export default class App extends React.Component {
 
   async componentDidMount() {
     console.log('componentDidMount');
-    this.setState({consumerKey: await this.fetchConsumerKey() ?? ''});
+    if (!this.state.code) {
+      this.setState({consumerKey: await this.fetchConsumerKey() ?? ''});
+
+      const urlParams = new URLSearchParams(window.location.search);
+      if (urlParams.has('code')) {
+        this.setState({ code: urlParams.get('code')});
+      }
+    }
   }
 
   render() {
