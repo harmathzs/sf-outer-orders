@@ -1,12 +1,16 @@
 // sf-query.js
 export default async function handler(req, res) {
   const accessToken = req.headers.authorization?.split(' ')[1];
+  console.log('accessToken length', accessToken.length);
   if (!accessToken) {
     return res.status(401).json({ error: 'Missing access token' });
   }
 
+  console.log('req.body', req.body);
+
   const soql = req.body.query;
   const url = req.body.url;
+  console.log('url', url);
 
   try {
     const sfResponse = await fetch(url, {
