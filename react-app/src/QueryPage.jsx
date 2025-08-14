@@ -27,7 +27,7 @@ export default class QueryPage extends React.Component {
         return <Form>
             <Form.Group>
                 <Form.Label>SOQL Query: </Form.Label>
-                <Form.Control as="textarea" rows={6} onChange={value=>this.setState({query: value})} />
+                <Form.Control as="textarea" rows={6} onChange={e=>this.setState({query: e.target.value})} />
             </Form.Group>
             <Button onClick={this.handleRun}>Run</Button>
         </Form>
