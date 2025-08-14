@@ -10,19 +10,17 @@ import Card from 'react-bootstrap/Card';
 //import sfCredentials from './credentials.js';
 
 export default class App extends React.Component {
-  state = {
-    externalClientAppConsumerKey: process.env.REACT_APP_EXTERNAL_CLIENT_APP_CONSUMER_KEY,
-    externalClientAppConsumerSecret: process.env.REACT_APP_EXTERNAL_CLIENT_APP_CONSUMER_SECRET,
+  async fetchConsumerKey() {
+    const response = await fetch('/api/get-sf-consumer-key');
+    const data = await response.json();
+    return data.consumerKey;
   }
 
-  render() {
-    console.log('process', process);
-    console.log('env', process.env);
-    console.log('keylen', process.env.REACT_APP_EXTERNAL_CLIENT_APP_CONSUMER_KEY?.length);
-    console.log('seclen', process.env.REACT_APP_EXTERNAL_CLIENT_APP_CONSUMER_SECRET?.length);
+  async render() {
+    const consumerKey = await this.fetchConsumerKey();
 
     const callbackUrl = 'https://sf-outer-orders.vercel.app/oauth/callback';
-    const sfAuthUrl = `https://login.salesforce.com/services/oauth2/authorize?response_type=code&client_id=${this.state.externalClientAppConsumerKey}&redirect_uri=${encodeURIComponent(callbackUrl)}&scope=refresh_token+api`;
+    const sfAuthUrl = `https://login.salesforce.com/services/oauth2/authorize?response_type=code&client_id=${consumerKey}&redirect_uri=${encodeURIComponent(callbackUrl)}&scope=refresh_token+api`;
 
     return <Container>
       <Row>
